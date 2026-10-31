@@ -47,13 +47,13 @@ const Auth = {
             return;
           }
           this.user = { uid: firebaseUser.uid, ...doc.data(), _provider: "firebase" };
-          App.onAuthStateChange(this.user);
+          AppShell.onAuthStateChange(this.user);
         } catch (err) {
           console.error("[Auth] profile load failed", err);
         }
       } else {
         this.user = null;
-        App.onAuthStateChange(null);
+        AppShell.onAuthStateChange(null);
       }
     });
   },
@@ -63,9 +63,9 @@ const Auth = {
     const raw = localStorage.getItem(LS_USER);
     if (raw) {
       this.user = JSON.parse(raw);
-      App.onAuthStateChange(this.user);
+      AppShell.onAuthStateChange(this.user);
     } else {
-      App.onAuthStateChange(null);
+      AppShell.onAuthStateChange(null);
     }
   },
 
@@ -89,7 +89,7 @@ const Auth = {
       localStorage.setItem(LS_USER, JSON.stringify(user));
       this.user = user;
       this.lastActivity = Date.now();
-      App.onAuthStateChange(user);
+      AppShell.onAuthStateChange(user);
       return user;
     }
     // Demo branch head / school head logins via email
@@ -101,7 +101,7 @@ const Auth = {
         localStorage.setItem(LS_USER, JSON.stringify(prof));
         this.user = prof;
         this.lastActivity = Date.now();
-        App.onAuthStateChange(prof);
+        AppShell.onAuthStateChange(prof);
         return prof;
       }
     }
@@ -116,7 +116,7 @@ const Auth = {
       const doc = await firebaseFirestore.collection("users").doc(uid).get();
       if (!doc.exists) throw new Error("No authorised profile found for this Google account. Contact the Super Admin.");
       this.user = { uid, ...doc.data(), _provider: "google" };
-      App.onAuthStateChange(this.user);
+      AppShell.onAuthStateChange(this.user);
       return this.user;
     }
     throw new Error("Google Sign-In requires live Firebase configuration.");
@@ -132,7 +132,7 @@ const Auth = {
     this.user = null;
     clearInterval(this.idleTimer);
     if (!silent) notify("Logged out.", "info");
-    App.onAuthStateChange(null);
+    AppShell.onAuthStateChange(null);
     if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
       // already on login
     } else {

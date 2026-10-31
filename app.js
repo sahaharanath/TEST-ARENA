@@ -2,7 +2,7 @@
 // Version tracking: APP_VERSION is the single source of truth for the app
 // version. Keep the `v=` cache-buster on script tags in app.html / index.html
 // synchronised with this value.
-const APP_VERSION = "1.0.0";
+const APP_VERSION = "1.0.1";
 const APP_NAME = "Unique Infotech CMS";
 const ORG_FIREBASE_PROJECT = "unique-infotech-cms";
 
@@ -28,22 +28,23 @@ const LS_SESSION = "uic_demo_session";
 const LS_SEED = "uic_demo_seeded";
 
 // ---------------------------------------------------------------------------
-// Utilities
+// Utilities — attached to window so they are globally available across all
+// script tags (including inline handlers in index.html) regardless of scope
+// or load-order edge cases.
 // ---------------------------------------------------------------------------
-const $ = (sel, root = document) => root.querySelector(sel);
-const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+window.$ = (sel, root = document) => root.querySelector(sel);
+window.$$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+window.on = (el, type, handler, opts = {}) => el.addEventListener(type, handler, opts);
+window.off = (el, type, handler) => el.removeEventListener(type, handler);
 
-const on = (el, type, handler, opts = {}) => el.addEventListener(type, handler, opts);
-const off = (el, type, handler) => el.removeEventListener(type, handler);
-
-function fmtDate(input) {
+window.fmtDate = function (input) {
   if (!input) return "";
   const d = input.toDate ? input.toDate() : new Date(input);
   if (isNaN(d)) return String(input);
   return d.toISOString().slice(0, 10);
-}
+};
 
-function fmtDateTime(input) {
+window.fmtDateTime = function (input) {
   if (!input) return "";
   const d = input.toDate ? input.toDate() : new Date(input);
   if (isNaN(d)) return String(input);
@@ -51,25 +52,24 @@ function fmtDateTime(input) {
     day: "2-digit", month: "2-digit", year: "numeric",
     hour: "2-digit", minute: "2-digit"
   });
-}
+};
 
-function fmtMoney(v) {
+window.fmtMoney = function (v) {
   const n = Number(v);
   if (!Number.isFinite(n)) return "₹0.00";
   return "₹" + n.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-}
+};
 
-function escapeHtml(text) {
+window.escapeHtml = function (text) {
   if (text == null) return "";
   const div = document.createElement("div");
   div.textContent = String(text);
   return div.innerHTML;
-}
+};
 
-// Simple client-side unique id
-function uid() {
+window.uid = function () {
   return "uic_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
-}
+};
 
 // ---------------------------------------------------------------------------
 // Demo store (localStorage) — preview only, never touches Firebase

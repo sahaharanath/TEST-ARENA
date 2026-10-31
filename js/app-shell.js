@@ -224,3 +224,4 @@ const AppShell = {
 };
 
 window.AppShell = AppShell;
+window.App = AppShell; // backward-compatible alias used by auth.js
