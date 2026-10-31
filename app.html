@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unique Infotech CMS</title>
+  <link rel="stylesheet" href="style.css?v=1.0.1">
+</head>
+<body>
+  <div class="banner-demo" style="display:none;" id="demoBanner">
+    <strong>PREVIEW / DEMO MODE</strong> — Firebase is not configured. Data is stored locally in this browser
+    (localStorage) and is demonstration data only. It will not reach the live Firebase project.
+  </div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand" id="sidebarBrand">
+      <img src="public/assets/images/logo.png" alt="Organisation logo" onerror="this.style.display='none'">
+      <div>Unique Infotech CMS<span class="section-tag" id="sidebarSectionTag">Youth Computer Centre</span></div>
+    </div>
+    <nav id="sidebarNav"></nav>
+    <div class="logout" id="sidebarLogout"><span class="icon-lucide" style="width:16px;height:16px;stroke-width:1.6;margin-right:8px"></span>Logout</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" id="menuToggle">&#9776;</button>
+        <div class="section-switch" id="sectionSwitch" style="display:none;">
+          <span id="sectionLabel">Section:</span>
+          <span id="sectionValue" class="badge">—</span>
+        </div>
+      </div>
+      <div class="user-chip" id="userChip" style="display:none;"><span id="userName">—</span> <span id="userRole" class="role">—</span></div>
+      <button class="btn-logout-top" id="topLogout">Logout</button>
+    </header>
+
+    <div id="notify" class="uic-notify uic-notify--info"></div>
+
+    <main class="page" id="pageContent">
+      <div id="router-outlet"></div>
+    </main>
+  </div>
+
+  <!-- Firebase SDK (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+  <script src="firebase-config.js?v=1.0.1"></script>
+  <script src="app.js?v=1.0.1"></script>
+  <script src="auth.js?v=1.0.1"></script>
+  <script src="db.js?v=1.0.1"></script>
+  <script src="router.js?v=1.0.1"></script>
+  <script src="js/ui.js?v=1.0.1"></script>
+  <script src="js/app-shell.js?v=1.0.1"></script>
+  <script>
+    (function(){
+      const demoBanner = $("#demoBanner");
+      if (DEMO_MODE) { demoBanner.style.display = "flex"; } else { demoBanner.style.display = "none"; }
+      AppShell.init();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<div class="toolbar" style="border:none;padding:0;margin-bottom:16px;">
+  <button class="secondary" onclick="Router.navigate('#/payments')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back to payments</button>
+</div>
+<div class="panel" id="receiptNotFound" style="display:none;">
+  <div class="panel-body">
+    <div class="empty-state"><h3>Receipt not found</h3><p>Transaction ID not provided or record does not exist.</p></div>
+  </div>
+</div>
+<div id="receiptArea" style="display:none;">
+  <div class="receipt-copies" id="receiptCopies"></div>
+  <div class="actions" style="margin-top:16px;">
+    <button id="rcptPrintStudent">Print Student Copy</button>
+    <button id="rcptPrintOffice">Print Office Copy</button>
+    <button id="rcptPrintMerged">Print Merged Copy</button>
+    <button id="rcptPdfStudent">Download Student Copy (PDF)</button>
+    <button id="rcptPdfOffice">Download Office Copy (PDF)</button>
+    <button id="rcptPdfMerged">Download Merged Copy (PDF)</button>
+  </div>
+</div>

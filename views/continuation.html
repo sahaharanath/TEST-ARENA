@@ -1,0 +1,46 @@
+<div class="toolbar">
+  <button class="secondary" onclick="Router.navigate('#/students')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back to students</button>
+</div>
+<div class="panel">
+  <div class="panel-head">Semester continuation &mdash; admit an existing student to the next semester</div>
+  <div class="panel-body">
+    <form id="contForm" novalidate>
+      <div class="form-group">
+        <label>Select programme / package</label>
+        <select id="contPackage" required></select>
+        <div class="field-note">Semester 2 requires a verified Semester 1 admission of the same package; Semester 3 requires Semester 1 and 2 history.</div>
+      </div>
+      <div class="form-group">
+        <label>Search existing student (by Student ID or name)</label>
+        <input type="search" id="contSearch" placeholder="Type to search...">
+        <div id="contResults" style="margin-top:6px;max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff;"></div>
+      </div>
+      <div id="contStudentCard" style="display:none;margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:var(--radius);background:#f5f3f8;">
+        <div><b>Student:</b> <span id="contStudentName"></span> <span class="id-cell" id="contStudentId"></span></div>
+        <div><b>Branch:</b> <span id="contStudentBranch"></span> &middot; <b>Last course:</b> <span id="contStudentCourse"></span></div>
+      </div>
+      <div class="form-group" style="margin-top:14px;">
+        <label>Previous course completion</label>
+        <div id="contHistory"></div>
+      </div>
+      <div class="form-group">
+        <label>Batch</label>
+        <select id="contBatch" required></select>
+      </div>
+      <div class="form-group">
+        <label>Admission date</label>
+        <input type="date" id="contDate" required>
+      </div>
+      <div class="form-group">
+        <label>Admission fee</label><input type="number" id="contAdmFee" min="0" required>
+      </div>
+      <div class="form-group">
+        <label>Examination fee</label><input type="number" id="contExamFee" min="0" required>
+      </div>
+      <div class="actions" style="margin-top:20px;">
+        <button type="button" class="secondary" onclick="Router.navigate('#/students')">Cancel</button>
+        <button type="submit" id="contSave">Create continuation admission</button>
+      </div>
+    </form>
+  </div>
+</div>

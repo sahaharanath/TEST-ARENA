@@ -1,0 +1,74 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "students",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "field": "program", "order": "ASCENDING" },
+        { "field": "branchId", "order": "ASCENDING" },
+        { "field": "status", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "students",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "field": "studentId", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "admissions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "field": "studentId", "order": "ASCENDING" },
+        { "field": "status", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "field": "studentId", "order": "ASCENDING" },
+        { "field": "paidAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "field": "branchId", "order": "ASCENDING" },
+        { "field": "paidAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "schoolTransactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "field": "studentId", "order": "ASCENDING" },
+        { "field": "paidAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "schoolTransactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "field": "month", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "batches",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "field": "status", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "field": "status", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
