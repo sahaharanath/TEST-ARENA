@@ -46,6 +46,13 @@ const AppShell = {
     }
     this.currentRole = user.role;
     this.currentSection = Auth.sectionForRole();
+
+    // If we are on the login page, redirect to the app shell after successful login
+    if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
+      window.location.replace("app.html");
+      return;
+    }
+
     this._renderSidebar();
     this._updateTopbar(user);
     this._route();
