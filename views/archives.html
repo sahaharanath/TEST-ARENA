@@ -1,0 +1,32 @@
+<div class="toolbar">
+  <label style="font-size:13px;font-weight:600;">Batch</label>
+  <select id="arBatch" style="width:260px;"></select>
+  <button id="arGen">Generate Archive ZIP</button>
+  <button id="arDownload" style="display:none;">Download ZIP</button>
+</div>
+<div class="panel" id="arVerify" style="display:none;margin-top:16px;">
+  <div class="panel-head">Archive verification</div>
+  <div class="panel-body">
+    <div id="arVerifyList"></div>
+    <div class="section-intro" style="margin-top:10px;">Extract the ZIP and open <code>index.html</code> to inspect historical records offline, without Firebase or internet.</div>
+  </div>
+</div>
+<div class="panel" id="arDelete" style="display:none;margin-top:16px;border:2px solid var(--danger);">
+  <div class="panel-head" style="color:var(--danger);">Permanent deletion (optional)</div>
+  <div class="panel-body">
+    <div class="section-intro">Only after you have downloaded and verified the archive. Deletion removes the batch and all associated student, admission, payment and document records from live Firebase. This cannot be undone.</div>
+    <div class="form-group">
+      <label>Re-enter Super Admin password</label><input type="password" id="arPwd" placeholder="Password"><div class="field-note">Password re-authentication is required before deletion.</div>
+    </div>
+    <div style="margin:10px 0;">
+      <label style="display:block;margin-bottom:4px;font-weight:600;">Confirm:</label>
+      <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="arC1"> I have downloaded and verified the archive ZIP.</label><br>
+      <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="arC2"> I understand this permanently deletes live data and cannot be undone.</label><br>
+      <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="arC3"> I want to permanently delete batch <span id="arBatchName"></span> and its associated records.</label>
+    </div>
+    <div class="actions" style="margin-top:14px;">
+      <button id="arDeleteBtn" class="danger" disabled>Permanently delete batch data</button>
+      <button class="secondary" onclick="arCancelDelete()">Cancel</button>
+    </div>
+  </div>
+</div>

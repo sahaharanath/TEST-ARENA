@@ -1,0 +1,29 @@
+<div class="toolbar" style="border:none;padding-bottom:0;margin-bottom:0;">
+  <div class="search-box" style="width:320px;">
+    <span class="icon-lucide"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> </span>
+    <input type="search" id="pfStudentId" placeholder="Enter Student ID and press Enter">
+  </div>
+</div>
+<div class="panel" id="pfStudentPanel" style="display:none;">
+  <div class="panel-body">
+    <div id="pfStudentInfo"></div>
+    <div class="table-wrap" id="pfInstallments"></div>
+    <div id="pfPaymentForm" style="margin-top:16px;">
+      <div class="form-grid">
+        <div class="form-group"><label>Installment / fee to pay</label><select id="pfItem"></select></div>
+        <div class="form-group"><label>Amount due</label><input type="number" id="pfDue" readonly></div>
+        <div class="form-group"><label>Applicable fine</label><input type="number" id="pfFine" min="0" step="0.01"></div>
+        <div class="form-group"><label>Waiver / reduction</label><input type="number" id="pfWaiver" min="0" step="0.01"><div class="field-note">Requires authorisation; reason is recorded.</div></div>
+        <div class="form-group"><label>Waiver reason</label><input type="text" id="pfWaiverReason" placeholder="Reason for waiver"></div>
+        <div class="form-group"><label>Payment method</label><select id="pfMethod"><option value="cash">Cash</option><option value="upi">UPI</option><option value="bank">Bank Transfer</option></select></div>
+        <div class="form-group"><label>Payment date</label><input type="date" id="pfDate" required></div>
+        <div class="form-group full"><label>Collected by</label><span id="pfCollector"></span></div>
+      </div>
+      <div class="actions" style="margin-top:14px;">
+        <button type="button" class="secondary" onclick="pfReset()">Clear search</button>
+        <button id="pfSave" class="icon" style="margin-left:auto;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Record Payment</button>
+      </div>
+    </div>
+    <div id="pfPreviousPayments" style="margin-top:16px;"></div>
+  </div>
+</div>

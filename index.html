@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Unique Infotech CMS</title>
+  <link rel="stylesheet" href="style.css?v=1.0.0">
+</head>
+<body>
+  <div class="page" style="max-width: 400px;">
+    <div class="panel" style="padding: 30px;">
+      <div class="brand" style="display:flex; align-items:center; gap:10px; margin-bottom: 24px;">
+        <img src="public/assets/images/logo.png" alt="Organisation logo" style="width:32px;height:32px;object-fit:contain;" onerror="this.style.display='none'">
+        <div>
+          <div style="font-weight:700; font-size:16px; letter-spacing:0.4px;">Unique Infotech CMS</div>
+          <div style="font-size:12px; color:var(--muted);">Bankura Zilla Youth Computer Training Centre &middot; Unique Infotech</div>
+        </div>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="utpal.goutam@gmail.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <div class="form-group" style="margin-top: 8px;">
+          <button type="submit" id="btnSignIn">Sign in</button>
+        </div>
+      </form>
+
+      <p id="demoNote" style="margin-top: 18px; font-size: 12.5px; color: var(--muted); text-align: center;"></p>
+      <p id="googleNote" style="margin-top: 10px; font-size: 12.5px; color: var(--muted); text-align: center;"></p>
+
+      <div id="googleRow" style="margin-top: 16px; text-align: center;"></div>
+    </div>
+
+    <div class="uic-notify uic-notify--danger" id="loginError" style="margin-top: 12px;"></div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js?v=1.0.0"></script>
+  <script src="app.js?v=1.0.0"></script>
+  <script src="auth.js?v=1.0.0"></script>
+  <script src="db.js?v=1.0.0"></script>
+  <script>
+    (function(){
+      const form = $("#loginForm");
+      const error = $("#loginError");
+      const demoNote = $("#demoNote");
+      const googleNote = $("#googleNote");
+      const googleRow = $("#googleRow");
+
+      if (DEMO_MODE) {
+        demoNote.textContent = "Preview mode: demo credentials. Sign in with utpal.goutam@gmail.com / any password.";
+        demoNote.style.color = "#5c4a00";
+      } else {
+        demoNote.textContent = "Live mode: Firebase configured. Super Admin email: utpal.goutam@gmail.com";
+      }
+
+      if (firebaseReady && firebaseAuth) {
+        googleNote.textContent = "Branch Heads and School Heads sign in with Google.";
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "button secondary icon";
+        btn.innerHTML = '<svg class="icon-lucide" style="width:16px;height:16px;stroke-width:1.6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.19v2.77C3.75 22.02 7.69 23 12 23z"/><path d="M5.84 14.09c-.22-.64-.35-1.36-.35-2.09s.13-1.45.35-2.09V7.07H2.19C1.43 8.55 1 10.22 1 12.06s.43 3.51 1.19 4.93l2.86-2.9z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.69 1 3.75 2.02 2.19 4.85l2.77 2.77c2.27-2.6 5.84-4.27 9.84-4.27z"/></svg> Sign in with Google
+        </button>;
+        btn.onclick = () => Auth.googleSignIn().catch((err) => { $("#loginError").textContent = err.message || String(err); });
+        googleRow.appendChild(btn);
+      } else {
+        googleRow.innerHTML = '<p style="font-size:12px; color:var(--muted);">Google Sign-In unavailable in preview mode (Firebase not configured).</p>';
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        error.textContent = "";
+        const btn = $("#btnSignIn");
+        btn.disabled = true;
+        btn.textContent = "Signing in...";
+        try {
+          await Auth.login(form.email.value.trim(), form.password.value);
+        } catch (err) {
+          error.textContent = err.message || String(err);
+          btn.disabled = false;
+          btn.textContent = "Sign in";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

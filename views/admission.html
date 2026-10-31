@@ -1,0 +1,82 @@
+<div class="toolbar">
+  <button class="secondary" onclick="Router.navigate('#/students')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back to students</button>
+</div>
+<div class="panel">
+  <div class="panel-head">New admission &mdash; Youth Computer Centre (Semester 1 / Certificate entry)</div>
+  <div class="panel-body">
+    <form id="admissionForm" novalidate>
+      <div class="section-intro" style="margin-bottom:14px;">Step 1 &mdash; Programme and course</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Programme</label>
+          <select id="admProgramme" required></select>
+        </div>
+        <div class="form-group">
+          <label>Course (filtered by programme)</label>
+          <select id="admCourse" required></select>
+        </div>
+        <div class="form-group">
+          <label>Batch</label>
+          <select id="admBatch" required></select>
+        </div>
+        <div class="form-group full">
+          <label>Branch</label>
+          <select id="admBranch" required></select>
+        </div>
+      </div>
+
+      <div class="section-intro" style="margin:16px 0 8px;">Step 2 &mdash; Student information</div>
+      <div class="form-grid">
+        <div class="form-group"><label>Full name</label><input type="text" id="admName" required></div>
+        <div class="form-group"><label>Student ID (auto-generated, editable)</label><input type="text" id="admStudentId" required></div>
+        <div class="form-group"><label>Date of birth</label><input type="date" id="admDob" required></div>
+        <div class="form-group"><label>Gender</label><select id="admGender"><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div>
+        <div class="form-group"><label>Guardian / parent name</label><input type="text" id="admGuardian" required></div>
+        <div class="form-group"><label>Guardian contact number</label><input type="tel" id="admGuardianPhone" required></div>
+        <div class="form-group"><label>Student contact number (optional)</label><input type="tel" id="admStudentPhone"></div>
+        <div class="form-group full"><label>Full address</label><textarea id="admAddress" required></textarea></div>
+        <div class="form-group"><label>Admission date</label><input type="date" id="admDate" required></div>
+      </div>
+
+      <div class="section-intro" style="margin:16px 0 8px;">Step 3 &mdash; Documents (max 2 MB each; images are compressed before upload)</div>
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>1. Birth Certificate / Aadhaar / Madhyamik Admit Card</label>
+          <input type="file" id="admDoc1" accept="image/*,.pdf">
+          <div id="preview1" style="margin-top:6px;"></div>
+          <div class="field-note">Category: identity / age proof</div>
+        </div>
+        <div class="form-group full">
+          <label>2. Higher Qualification Marksheet</label>
+          <input type="file" id="admDoc2" accept="image/*,.pdf">
+          <div id="preview2" style="margin-top:6px;"></div>
+          <div class="field-note">Category: qualification</div>
+        </div>
+        <div class="form-group full">
+          <label>3. Passport-size Photograph</label>
+          <input type="file" id="admDoc3" accept="image/*">
+          <div id="preview3" style="margin-top:6px;"></div>
+          <div class="field-note">Category: photograph</div>
+        </div>
+        <div class="form-group full">
+          <label>4. Student Signature</label>
+          <input type="file" id="admDoc4" accept="image/*">
+          <div id="preview4" style="margin-top:6px;"></div>
+          <div class="field-note">Category: signature</div>
+        </div>
+      </div>
+
+      <div class="section-intro" style="margin:16px 0 8px;">Step 4 &mdash; Fee and admission information</div>
+      <div class="form-grid">
+        <div class="form-group"><label>Admission fee</label><input type="number" id="admAdmFee" min="0" required></div>
+        <div class="form-group"><label>Examination fee</label><input type="number" id="admExamFee" min="0" required></div>
+        <div class="form-group full"><label>Notes</label><textarea id="admNotes"></textarea></div>
+      </div>
+
+      <div class="actions" style="margin-top:20px;">
+        <button type="button" class="secondary" onclick="Router.navigate('#/students')">Cancel</button>
+        <button type="submit" id="admSave">Save admission</button>
+      </div>
+    </form>
+  </div>
+</div>
